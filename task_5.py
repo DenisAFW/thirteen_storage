@@ -36,7 +36,7 @@ def load_users(path: str = 'test_bd.json'):
         print(f'Введены неверные данные -> {exp}')
     keys = []
     names = []
-    keys_count, names_count = 0, 0
+    names_count = 0
 
     try:
         with open(path, 'r', encoding='utf-8') as fj:
@@ -57,18 +57,14 @@ def load_users(path: str = 'test_bd.json'):
         except UnboundLocalError as exp:
             print(f'Не введено имя пользователя!-> {exp}')
         try:
-            if input_key in keys:
-                for i in keys:
-                    if input_key != i:
-                        keys_count += 1
-                    else:
-                        break
+            if keys[names_count] == input_key:
+                print(f'Ваш уровень доступа -> {input_key}')
             else:
                 raise LevelError
         except UnboundLocalError as exp:
             print(f'Не введен уровень доступа! -> {exp}')
 
-        if keys[keys_count] == input_key and names[names_count] == input_name:
+        if (keys[names_count] == input_key) and (names[names_count] == input_name):
             print('Добро пожаловать домой, Агент К')
         else:
             raise AccessError
